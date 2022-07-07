@@ -14,67 +14,69 @@
         
     </div>
 
-    <div class="sidebar">
-        <div class="lists">
-            <h4>My Lists</h4>
-            <ul>
-                <li class="list active-list">first</li>
-                <li class="list">second</li>
-                <li class="list">third</li>
-            </ul>
-        </div>
-
-        <form action="">
-            <input class="input-list" type="text" placeholder="Add a list">
-            <button class="list-button">+</button>  
-        </form>
-
-        <div class="options">
-            <button class="light-dark-mode"></button>
-        
-            <label for="theme">Choose a theme:</label>
-            <select name="theme" id="theme">
-                <option value="japan">Japan</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="main">
-        <div class="tasks-header">
-            <h3 class="list-name">List Name Here</h3>
-            <div class="remaining">3 tasks remaining</div>
-        </div>
-
-        <div class="tasks-container">
-            <div class="task">
-                <input type="checkbox" id="task-1">
-                <label for="task-1"><span class="custom-checkbox"></span>create todo app<button class="delete-btn">x</button></label>
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="lists">
+                <h4>My Lists</h4>
+                <ul>
+                    <li class="list active-list">first</li>
+                    <li class="list">second</li>
+                    <li class="list">third</li>
+                </ul>
             </div>
-            <div class="task">
-                <input type="checkbox" id="task-2">
-                <label for="task-2"><span class="custom-checkbox"></span>create own portfolio<button class="delete-btn">x</button></label>
-            </div>
-            <div class="task">
-                <input type="checkbox" id="task-3">
-                <label for="task-3"><span class="custom-checkbox"></span>think of new app ideas<button class="delete-btn">x</button></label>
+
+            <form action="">
+                <input class="input-list" type="text" placeholder="Add a list">
+                <button class="list-button">+</button>  
+            </form>
+
+            <div class="options">
+                <button class="light-dark-mode"></button>
+            
+                <label for="theme">Choose a theme:</label>
+                <select name="theme" id="theme">
+                    <option value="japan">Japan</option>
+                </select>
             </div>
         </div>
 
-        <form action="">
-            <input class="input-task" type="text" placeholder="Add a task">
-            <button class="task-button">+</button>
-        </form>
+        <div class="main">
+            <div class="tasks-header">
+                <h3 class="list-name">List Name Here</h3>
+                <div class="remaining">3 tasks remaining</div>
+            </div>
 
-        <div class="filter">
-            <button class="show show-all">All</button>
-            <button class="show show-done">Done</button>
-            <button class="show show-active">Active</button>
+            <div class="tasks-container">
+                <div class="task">
+                    <input type="checkbox" id="task-1">
+                    <label for="task-1"><span class="custom-checkbox"></span>create todo app<button class="delete-btn">x</button></label>
+                </div>
+                <div class="task">
+                    <input type="checkbox" id="task-2">
+                    <label for="task-2"><span class="custom-checkbox"></span>create own portfolio<button class="delete-btn">x</button></label>
+                </div>
+                <div class="task">
+                    <input type="checkbox" id="task-3">
+                    <label for="task-3"><span class="custom-checkbox"></span>think of new app ideas<button class="delete-btn">x</button></label>
+                </div>
+            </div>
+
+            <form action="">
+                <input class="input-task" type="text" placeholder="Add a task">
+                <button class="task-button">+</button>
+            </form>
+
+            <div class="filter">
+                <button class="show show-all">All</button>
+                <button class="show show-done">Done</button>
+                <button class="show show-active">Active</button>
+            </div>
         </div>
     </div>
 
     <div class="quote-container">
-        <p class="quote"></p>
-        <p class="person"></p>
+        <p class="quote">"No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable."</p>
+        <p class="person"> - Socrates</p>
     </div>
 </body>
 </html>

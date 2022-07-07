@@ -1,16 +1,62 @@
 :root {
-
+--spacing: 3em;
 }
 
 body {
     margin: 0;
     padding: 0;
     background: url();
+
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    margin: calc(var(--spacing) / 2) var(--spacing);
+    align-self: flex-start;
+    font-size: 22px;
+    margin: calc(var(--spacing) / 2) var(--spacing);
+    font-weight: 900;
+}
+
+h1 {
+    margin: 0;
+}
+
+.main-container {
+    margin-left: var(--spacing);
+    margin-right: var(--spacing);
+    height: 55vh;
+    
+    display: flex;
+}
+
+/* Side Content */
+.sidebar {
+    width: 35%;
+}
+
+
+
+/* Main Content */
+.main {
+    width: 65%;
+}
+
+.tasks-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .task {
     cursor: pointer;
     margin-bottom: .5rem;
+}
+
+/* Quotes */
+.quote-container {
+    align-self: center;
 }
 
 /* Custom checkbox */
@@ -69,7 +115,7 @@ body {
 
 
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
     body {
         display: grid;
         grid:
@@ -99,4 +145,4 @@ body {
         grid-area: quote;
         margin: 1rem auto;
     }
-}
+} */
