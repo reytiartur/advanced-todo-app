@@ -1,11 +1,14 @@
 :root {
---spacing: 3em;
+--spacing: 3rem;
+--border-color: #ccc;
 }
 
 body {
     margin: 0;
     padding: 0;
     background: url();
+
+    font-size: 20px;
 
     display: flex;
     flex-direction: column;
@@ -34,9 +37,43 @@ h1 {
 /* Side Content */
 .sidebar {
     width: 35%;
+    border: 1px solid var(--border-color);
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    padding: 0 1rem;
+
 }
 
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+}
 
+.options select {
+    height: 20px;
+    width: 80px;
+    font-size: 16px;
+    padding-left: 6px;
+}
+
+.light-dark-mode {
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 200ms ease-in;
+}
+
+svg:hover {
+    transform: scale(1.2);
+}
 
 /* Main Content */
 .main {
@@ -57,6 +94,9 @@ h1 {
 /* Quotes */
 .quote-container {
     align-self: center;
+    width: 40%;
+    margin-top: var(--spacing);
+    margin-bottom: var(--spacing);
 }
 
 /* Custom checkbox */
@@ -113,36 +153,34 @@ h1 {
     text-decoration: line-through;
 }
 
+/* Utilities */
+input {
+    border-radius: 12px;
+    width: 40%;
+    height: 26px;
+    font-size: 20px;
+    padding-left: 8px;
+    margin-right: 8px;
+}
 
+form {
+    display: flex;
+    align-items: center;
+}
 
-/* @media (min-width: 768px) {
-    body {
-        display: grid;
-        grid:
-        "...... header ...... ......" auto
-        "...... sidebar tasks ......" auto
-        "...... quote quote ......" auto /
-        1fr minmax(150px, 400px) minmax(300px, 700px) 1fr;
-    }
+button.plus{
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+}
 
-    .header {
-        grid-area: header;
-        margin: 1rem 1rem;
-        text-align: start;
-    }
+button.plus:hover {
+    transform: scale(1.2);
+}
 
-    .sidebar {
-        grid-area: sidebar;
-        margin-left: 1rem;
-    }
+/* @media (max-width: 768px) {
 
-    .main {
-        grid-area: tasks;
-        margin-right: 1rem;
-    }
-
-    .quote-container {
-        grid-area: quote;
-        margin: 1rem auto;
-    }
-} */
+}
