@@ -79,7 +79,13 @@ function render() {
         console.log(selectedListID)
         console.log(list.dataset.listId)
         if(list.dataset.listId === selectedListID) {
-            list.classList.add("active-list")
+            list.classList.add("active-list");
+
+            let deleteBtn = document.createElement("button");
+            deleteBtn.classList.add("delete-btn");
+            deleteBtn.innerHTML = "x";
+            deleteBtn.style.marginLeft = "1rem";
+            list.append(deleteBtn);
         }
         listsContainer.append(list);
     })

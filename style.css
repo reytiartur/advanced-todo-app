@@ -210,7 +210,7 @@ svg:hover {
     box-shadow: var(--inside-shadow);
 }
 
-.task .delete-btn {
+.delete-btn {
     background: none;
     border: none;
     font-size: 20px;
@@ -219,10 +219,10 @@ svg:hover {
     transition: 200ms ease-in;
 }
 
-.task .delete-btn:hover {
-    transform: scale(1.2);
+.delete-btn:hover {
+    transform: scale(1.4);
     color: rgb(190, 25, 25);
-    padding-bottom: 4px;
+    cursor: pointer;
 }
 
 .main form {
