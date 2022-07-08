@@ -42,27 +42,24 @@
             <button class="new-quote">Get Quote</button>
         </div>
 
-        <div class="main">
+        <div class="main" data-tasks-main>
             <div class="tasks-header">
-                <h2 class="list-name">List Name Here</h2>
-                <div class="remaining">3 tasks remaining</div>
+                <h2 class="list-name" data-list-name>List Name Here</h2>
+                <div class="remaining" data-list-count>3 tasks remaining</div>
             </div>
 
-            <div class="tasks-container">
+            <div class="tasks-container" data-tasks>
                 <div class="task">
                     <input type="checkbox" id="task-1">
-                    <label for="task-1"><span class="custom-checkbox"></span>create todo app<button class="delete-btn">x</button></label>
-                    
+                    <label for="task-1"><span class="custom-checkbox"></span>create todo app<button class="delete-btn">x</button></label>    
                 </div>
                 <div class="task">
                     <input type="checkbox" id="task-2">
                     <label for="task-2"><span class="custom-checkbox"></span>create own portfolio<button class="delete-btn">x</button></label>
-                    
                 </div>
                 <div class="task">
                     <input type="checkbox" id="task-3">
                     <label for="task-3"><span class="custom-checkbox"></span>think of new app ideas<button class="delete-btn">x</button></label>
-                    
                 </div>
             </div>
 
@@ -83,5 +80,12 @@
         <p class="quote">"No man has the right to be an amateur in the matter of physical training. It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable."</p>
         <p class="person"> - Socrates</p>
     </div>
+    
+    <template id="task-template">
+        <div class="task">
+            <input type="checkbox" id="task-1">
+            <label for="task-1"><span class="custom-checkbox"></span>create todo app<button class="delete-btn">x</button></label>    
+        </div>
+    </template>
 </body>
 </html>
