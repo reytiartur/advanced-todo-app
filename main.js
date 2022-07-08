@@ -1,9 +1,8 @@
-const LOCAL_STORAGE_LISTS = "todo.lists"
-const LOCAL_STORAGE_SELECTED_LIST_ID = "todo.selectedListID"
-const LOCAL_STORAGE_TASKS = "todo.tasks"
+const LOCAL_STORAGE_LISTS = "task.lists"
+const LOCAL_STORAGE_SELECTED_LIST_ID = "task.selectedListID"
+const LOCAL_STORAGE_TASKS = "task.tasks"
 
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
-let tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASKS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
 
 
@@ -17,7 +16,6 @@ let newTaskInput = document.querySelector("[data-new-task-input]");
 let tasksContainer = document.querySelector("[data-tasks]");
 let listName = document.querySelector("[data-list-name]");
 let listTasksCount = document.querySelector("[data-list-count]");
-let taskTemplate = document.querySelector("task-template");
 
 let deleteBtn = document.querySelectorAll("delete-btn");
 
@@ -31,13 +29,23 @@ listsContainer.addEventListener("click", e => {
 
 listsContainer.addEventListener("click", e => {
     if(e.target.className === "delete-btn") {
-        deleteElement(e);
+        deleteList(e);
     }
 })
 
 tasksContainer.addEventListener("click", e => {
     if(e.target.className === "delete-btn") {
-        deleteElement(e);
+        deleteTask(e);
+    }
+})
+
+tasksContainer.addEventListener("click", e => {
+    if(e.target.tagName.toLowerCase() === "input") {
+        const selectedList = lists.find(list => list.id === selectedListID);
+        const selectedTask = selectedList.tasks.find(task => task.id === e.target.id);
+        selectedTask.done = e.target.checked;
+        save();
+        showTasksCount(selectedList);
     }
 })
 
@@ -52,16 +60,17 @@ newListForm.addEventListener("submit", e => {
     }
 })
 
-// newTaskForm.addEventListener("submit", e => {
-//     e.preventDefault();
-//     let taskName = newTaskInput.value;
-//     if(taskName !== null || taskName !== "") {
-//         let newTask = createTask(taskName);
-//         newTaskInput.value = null;
-//         tasks.push(newTask);
-//         saveAndRender();
-//     }
-// })
+newTaskForm.addEventListener("submit", e => {
+    e.preventDefault();
+    let taskName = newTaskInput.value;
+    if(taskName !== null || taskName !== "") {
+        let newTask = createTask(taskName);
+        newTaskInput.value = null;
+        let selectedList = lists.find(list => list.id == selectedListID);
+        selectedList.tasks.push(newTask);
+        saveAndRender();
+    }
+})
 
 function createList(name) {
     return { id: Date.now().toString(),
@@ -70,12 +79,12 @@ function createList(name) {
             }
 }
 
-// function createTask(name) {
-//     return { id: id,
-//             name: name,
-//             checked: false
-//             }
-// }
+function createTask(name) {
+    return { id: Date.now().toString(),
+            name: name,
+            done: false
+            }
+}
 
 function saveAndRender() {
     save();
@@ -85,7 +94,6 @@ function saveAndRender() {
 function save() {
     localStorage.setItem(LOCAL_STORAGE_LISTS, JSON.stringify(lists))
     localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID, selectedListID)
-    localStorage.setItem(LOCAL_STORAGE_TASKS, JSON.stringify(tasks))
 }
 
 function render() {
@@ -120,6 +128,7 @@ function renderLists() {
         list.classList.add("list");
         list.dataset.listId = item.id;
         list.innerText = item.name;
+        list.tasks = item.tasks;
         if(list.dataset.listId === selectedListID) {
             list.classList.add("active-list");
 
@@ -135,14 +144,19 @@ function renderLists() {
 
 function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
-        let taskInner = document.importNode(taskTemplate.content, true);
-        let checkbox = taskInner.querySelector("input");
-        let label = taskInner.querySelector("label");
+        let taskInner = document.createElement("div");
+        taskInner.innerHTML = `
+            <input type="checkbox" id="${task.id}">
+            <label for="${task.id}"><span class="custom-checkbox"></span>${task.name}<button class="delete-btn">x</button></label>    
+        `;
+        taskInner.classList.add("task");
 
+        let deleteBtn = taskInner.querySelector(".delete-btn");
+        deleteBtn.id = task.id;
+        
+        let checkbox = taskInner.querySelector("input[type=checkbox]");
         checkbox.id = task.id;
         checkbox.checked = task.done;
-        label.htmlFor = task.id;
-        label.append(task.name);
         tasksContainer.appendChild(taskInner);
     })
 }
@@ -151,7 +165,7 @@ function clear(element) {
     element.innerHTML = "";
 }
 
-function deleteElement(e) {
+function deleteList(e) {
     if(e.target.closest("li").classList.contains("list")) {
         lists = lists.filter(list => list.id !== selectedListID)
         // Show Previous or Next List on Delete
@@ -160,10 +174,34 @@ function deleteElement(e) {
         } else if (selectedListID.nextElementSibling) {
             selectedListID = selectedListID.nextElementSibling;
         }
-    } else if(e.target.closest("div").classList.contains("task")) {
-        tasks = task.filter(task => task.remove())
     }
     saveAndRender();
 }
+
+// function deleteTask(e) {
+//     if(e.target.closest("div").classList.contains("task")) {
+//         let closestTaskDiv = e.target.closest("div");
+//         closestTaskDiv.parentNode.removeChild(closestTaskDiv);
+
+//         const selectedList = lists.find(list => list.id === selectedListID);
+//         selectedList.tasks.forEach(task => {
+//             if(task.id == closestTaskDiv.id) {
+//                 let storageKey = task.name;
+//                 localStorage.removeItem(storageKey);
+//             }
+//         })
+         
+        
+        
+//         const selectedList = lists.find(list => list.id === selectedListID);
+//         selectedList.tasks.forEach(task => {
+//             if(task.id == closestTaskDiv.id) {
+//                 task.outerHTML = "";
+//             }
+//         })
+//     }
+        
+//     saveAndRender();
+// }
 
 render();
