@@ -87,15 +87,11 @@ h1 {
     transition: transform 200ms ease-in;
 }
 
-.list:hover,
-.list:focus {
+.list:hover {
     transform:translateX(20px);
     cursor: pointer;
 }
 
-.list:focus {
-    border-bottom: black solid 3px;
-}
 
 .options {
     display: flex;
@@ -244,7 +240,7 @@ svg:hover {
 }
 
 .show:hover, 
-.show.active {
+.show:focus {
     color: black;
     cursor: pointer;
     opacity: 1;
@@ -363,6 +359,12 @@ button.plus{
 
 button.plus:hover {
     transform: scale(1.2);
+}
+
+.active-list {
+    transform:translateX(20px);
+    cursor: pointer;
+    border-bottom: black solid 3px;
 }
 
 /* @media (max-width: 768px) {
