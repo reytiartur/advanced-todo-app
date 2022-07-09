@@ -107,13 +107,14 @@ function render() {
     renderTasks(selectedList);
 }
 
-function showListName(selectedList) {  
+function showListName(selectedList) {
+    if(selectedList) {
     listName.innerText = selectedList.name;
+    }
 }
 
 function showTasksCount(selectedList) {
     if (selectedList.tasks == undefined || selectedList.tasks.length == 0) {
-        console.log(selectedList.tasks)
         listTasksCount.innerText = `0 tasks remaining`;
     } else {
     const activeTasks = selectedList.tasks.filter(task => !task.done).length;
@@ -168,15 +169,18 @@ function clear(element) {
 
 function deleteList(e) {
     if(e.target.closest("li").classList.contains("list")) {
-        lists = lists.filter(list => list.id !== selectedListID)
-        // Show Previous or Next List on Delete
-        if(selectedListID.previousElementSibling) {
-            selectedListID = selectedListID.previousElementSibling;
-        } else if (selectedListID.nextElementSibling) {
-            selectedListID = selectedListID.nextElementSibling;
+        let index = lists.findIndex(list => list.id == selectedListID);
+        if (index > -1) {
+            lists.splice(index, 1);
+            if(lists.length > 0) {
+                selectedListID = lists[index - 1].id;
+            } else {
+                selectedList = [];
+            }
         }
+        saveAndRender();
     }
-    saveAndRender();
+    
 }
 
 function deleteTask(e) {
@@ -184,9 +188,6 @@ function deleteTask(e) {
         let closestTaskDiv = e.target.closest("div");
         const selectedList = lists.find(list => list.id === selectedListID);
         let index = selectedList.tasks.findIndex(task => task.id == closestTaskDiv.dataset.taskId);
-        console.log(closestTaskDiv.dataset.taskId);
-        console.log();
-        console.log(index);
         if (index > -1) {
             selectedList.tasks.splice(index, 1);  
         }
