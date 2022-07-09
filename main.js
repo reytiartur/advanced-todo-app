@@ -150,6 +150,7 @@ function renderTasks(selectedList) {
             <label for="${task.id}"><span class="custom-checkbox"></span>${task.name}<button class="delete-btn">x</button></label>    
         `;
         taskInner.classList.add("task");
+        taskInner.dataset.taskId = task.id;
 
         let deleteBtn = taskInner.querySelector(".delete-btn");
         deleteBtn.id = task.id;
@@ -178,30 +179,19 @@ function deleteList(e) {
     saveAndRender();
 }
 
-// function deleteTask(e) {
-//     if(e.target.closest("div").classList.contains("task")) {
-//         let closestTaskDiv = e.target.closest("div");
-//         closestTaskDiv.parentNode.removeChild(closestTaskDiv);
-
-//         const selectedList = lists.find(list => list.id === selectedListID);
-//         selectedList.tasks.forEach(task => {
-//             if(task.id == closestTaskDiv.id) {
-//                 let storageKey = task.name;
-//                 localStorage.removeItem(storageKey);
-//             }
-//         })
-         
-        
-        
-//         const selectedList = lists.find(list => list.id === selectedListID);
-//         selectedList.tasks.forEach(task => {
-//             if(task.id == closestTaskDiv.id) {
-//                 task.outerHTML = "";
-//             }
-//         })
-//     }
-        
-//     saveAndRender();
-// }
+function deleteTask(e) {
+    if(e.target.closest("div").classList.contains("task")) {
+        let closestTaskDiv = e.target.closest("div");
+        const selectedList = lists.find(list => list.id === selectedListID);
+        let index = selectedList.tasks.findIndex(task => task.id == closestTaskDiv.dataset.taskId);
+        console.log(closestTaskDiv.dataset.taskId);
+        console.log();
+        console.log(index);
+        if (index > -1) {
+            selectedList.tasks.splice(index, 1);  
+        }
+    }
+    saveAndRender();
+}
 
 render();
