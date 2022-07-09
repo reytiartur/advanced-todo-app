@@ -195,4 +195,26 @@ function deleteTask(e) {
     saveAndRender();
 }
 
+let newQuoteBtn = document.querySelector(".new-quote")
+
+newQuoteBtn.addEventListener("click", () => {
+    let quoteContainer = document.querySelector(".quote");
+    let authorContainer = document.querySelector(".person");
+
+    getQuote(quoteContainer, authorContainer);
+})
+
+    async function getQuote(quoteContainer, authorContainer) {
+        let response = await fetch("https://api.quotable.io/random");
+        let quote = await response.json();
+        if(response.ok) {
+            quoteContainer.innerText = quote.content;
+            authorContainer.innerText = `- ${quote.author}`;
+        } else {
+            quoteContainer.innerText = "Houston, we have a problem here..."
+            authorContainer.innerText = `Error...`;
+        }
+
+    }
+
 render();
