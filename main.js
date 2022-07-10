@@ -111,6 +111,7 @@ function render() {
     showTasksCount(selectedList);
     clear(tasksContainer)
     renderTasks(selectedList);
+    checkDarkMode(darkMode);
 }
 
 function showListName(selectedList) {
@@ -177,6 +178,21 @@ function clear(element) {
     element.innerHTML = "";
 }
 
+function checkDarkMode(darkMode) {
+    console.log(darkMode)
+    if(darkMode == "enabled") {
+        sidebar.classList.remove("light-mode");
+        mainTasksContainer.classList.remove("light-mode");
+        sidebar.classList.add("dark-mode");
+        mainTasksContainer.classList.add("dark-mode");
+    } else if (darkMode == null) {
+        sidebar.classList.remove("dark-mode");
+        mainTasksContainer.classList.remove("dark-mode");
+        sidebar.classList.add("light-mode");
+        mainTasksContainer.classList.add("light-mode");
+    }
+}
+
 function deleteList(e) {
     if(e.target.closest("li").classList.contains("list")) {
         let index = lists.findIndex(list => list.id == selectedListID);
@@ -240,9 +256,7 @@ darkModeBtn.addEventListener("click", () => {
         mainTasksContainer.classList.add("light-mode");
         darkMode = null;
     }
-    saveAndRender()
-    console.log(darkMode)
-
+    save();
 })
 
 
