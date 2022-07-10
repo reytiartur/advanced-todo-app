@@ -7,9 +7,11 @@
 
 /* Light */
 --bg-container-light: rgba(225, 225, 225, 0.8);
+--text-light: rgb(0, 0, 0);
 
 /* Dark */
 --bg-container-dark: rgba(0, 0, 0, 0.5);
+--text-dark: rgb(255, 255, 255);
 }
 
 body {
@@ -365,6 +367,16 @@ button.plus:hover {
     transform:translateX(20px);
     cursor: pointer;
     border-bottom: black solid 3px;
+}
+
+.dark-mode {
+    background: var(--bg-container-dark);
+    color: var(--text-dark);
+}
+
+.light-mode {
+    background: var(--bg-container-light);
+    color: var(--text-light);
 }
 
 /* @media (max-width: 768px) {

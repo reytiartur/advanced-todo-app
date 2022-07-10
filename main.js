@@ -1,23 +1,28 @@
 const LOCAL_STORAGE_LISTS = "task.lists"
 const LOCAL_STORAGE_SELECTED_LIST_ID = "task.selectedListID"
 const LOCAL_STORAGE_TASKS = "task.tasks"
+const LOCAL_STORAGE_DARK_MODE = "mode.darkMode"
 
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
+let darkMode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DARK_MODE));
 
 
-
+let sidebar = document.querySelector("[data-sidebar]");
 let listsContainer = document.querySelector("[data-lists]");
 let newListForm = document.querySelector("[data-new-list-form]");
 let newListInput = document.querySelector("[data-new-list-input]");
 
 let newTaskForm = document.querySelector("[data-new-task-form]");
 let newTaskInput = document.querySelector("[data-new-task-input]");
+let mainTasksContainer = document.querySelector("[data-tasks-main]");
 let tasksContainer = document.querySelector("[data-tasks]");
 let listName = document.querySelector("[data-list-name]");
 let listTasksCount = document.querySelector("[data-list-count]");
 
-let deleteBtn = document.querySelectorAll("delete-btn");
+let deleteBtn = document.querySelectorAll(".delete-btn");
+let newQuoteBtn = document.querySelector(".new-quote");
+let darkModeBtn = document.querySelector(".light-dark-mode");
 
 
 listsContainer.addEventListener("click", e => {
@@ -94,6 +99,7 @@ function saveAndRender() {
 function save() {
     localStorage.setItem(LOCAL_STORAGE_LISTS, JSON.stringify(lists))
     localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID, selectedListID)
+    localStorage.setItem(LOCAL_STORAGE_DARK_MODE, JSON.stringify(darkMode))
 }
 
 function render() {
@@ -114,7 +120,7 @@ function showListName(selectedList) {
 }
 
 function showTasksCount(selectedList) {
-    if (selectedList.tasks == undefined || selectedList.tasks.length == 0) {
+    if (selectedList.tasks.length == 0) {
         listTasksCount.innerText = `0 tasks remaining`;
     } else {
     const activeTasks = selectedList.tasks.filter(task => !task.done).length;
@@ -124,7 +130,11 @@ function showTasksCount(selectedList) {
 }
 
 function renderLists() {
+    // if(lists.length < 1) {
+    //     mainTasksContainer.style.opacity = 0;
+    // } else {
     lists.forEach(item => {
+        // mainTasksContainer.style.opacity = 1;
         const list = document.createElement("li");
         list.classList.add("list");
         list.dataset.listId = item.id;
@@ -140,8 +150,8 @@ function renderLists() {
             list.append(deleteBtn);
         }
         listsContainer.append(list);
-    })
-}
+    })}
+// }
 
 function renderTasks(selectedList) {
     selectedList.tasks.forEach(task => {
@@ -195,8 +205,6 @@ function deleteTask(e) {
     saveAndRender();
 }
 
-let newQuoteBtn = document.querySelector(".new-quote")
-
 newQuoteBtn.addEventListener("click", () => {
     let quoteContainer = document.querySelector(".quote");
     let authorContainer = document.querySelector(".person");
@@ -216,5 +224,26 @@ newQuoteBtn.addEventListener("click", () => {
         }
 
     }
+
+darkModeBtn.addEventListener("click", () => {
+    console.log(darkMode)
+    if(darkMode == null) {
+        sidebar.classList.remove("light-mode");
+        mainTasksContainer.classList.remove("light-mode");
+        sidebar.classList.add("dark-mode");
+        mainTasksContainer.classList.add("dark-mode");
+        darkMode = "enabled";
+    } else if (darkMode == "enabled") {
+        sidebar.classList.remove("dark-mode");
+        mainTasksContainer.classList.remove("dark-mode");
+        sidebar.classList.add("light-mode");
+        mainTasksContainer.classList.add("light-mode");
+        darkMode = null;
+    }
+    saveAndRender()
+    console.log(darkMode)
+
+})
+
 
 render();
