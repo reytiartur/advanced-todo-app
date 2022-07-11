@@ -254,6 +254,9 @@ svg:hover {
 .quote-container {
     align-self: center;
     width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: var(--spacing);
     margin-bottom: var(--spacing);
     padding: var(--padding-container);
