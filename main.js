@@ -23,6 +23,7 @@ let listTasksCount = document.querySelector("[data-list-count]");
 let deleteBtn = document.querySelectorAll(".delete-btn");
 let newQuoteBtn = document.querySelector(".new-quote");
 let darkModeBtn = document.querySelector(".light-dark-mode");
+let themeChanger = document.querySelector("#theme");
 
 
 listsContainer.addEventListener("click", e => {
@@ -76,6 +77,11 @@ newTaskForm.addEventListener("submit", e => {
         saveAndRender();
     }
 })
+
+themeChanger.addEventListener('change', function() {
+    console.log(this.value)
+    document.body.style.backgroundImage = this.value;
+});
 
 function createList(name) {
     return { id: Date.now().toString(),

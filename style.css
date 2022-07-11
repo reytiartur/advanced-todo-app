@@ -17,7 +17,8 @@
 body {
     margin: 0;
     padding: 0;
-    background: url(./images/ancient1.jpg) no-repeat;
+    background-image: url(./images/ancient1.jpg);
+    background-repeat: no-repeat;
     background-size: cover;
     font-size: 20px;
     height: 100vh;
