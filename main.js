@@ -2,10 +2,12 @@ const LOCAL_STORAGE_LISTS = "task.lists"
 const LOCAL_STORAGE_SELECTED_LIST_ID = "task.selectedListID"
 const LOCAL_STORAGE_TASKS = "task.tasks"
 const LOCAL_STORAGE_DARK_MODE = "mode.darkMode"
+const LOCAL_STORAGE_CHOSEN_BG = "theme.chosenBackground"
 
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
 let darkMode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DARK_MODE));
+let chosenBackground = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CHOSEN_BG)) || "url(./images/ancient1.jpg)";
 
 
 let sidebar = document.querySelector("[data-sidebar]");
@@ -19,6 +21,8 @@ let mainTasksContainer = document.querySelector("[data-tasks-main]");
 let tasksContainer = document.querySelector("[data-tasks]");
 let listName = document.querySelector("[data-list-name]");
 let listTasksCount = document.querySelector("[data-list-count]");
+
+let quoteContainer = document.querySelector("[data-quote-container]");
 
 let deleteBtn = document.querySelectorAll(".delete-btn");
 let newQuoteBtn = document.querySelector(".new-quote");
@@ -79,8 +83,10 @@ newTaskForm.addEventListener("submit", e => {
 })
 
 themeChanger.addEventListener('change', function() {
-    console.log(this.value)
     document.body.style.backgroundImage = this.value;
+    chosenBackground = this.value;
+    console.log(this.value)
+    saveAndRender()
 });
 
 function createList(name) {
@@ -106,6 +112,7 @@ function save() {
     localStorage.setItem(LOCAL_STORAGE_LISTS, JSON.stringify(lists))
     localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID, selectedListID)
     localStorage.setItem(LOCAL_STORAGE_DARK_MODE, JSON.stringify(darkMode))
+    localStorage.setItem(LOCAL_STORAGE_CHOSEN_BG, JSON.stringify(chosenBackground))
 }
 
 function render() {
@@ -118,6 +125,7 @@ function render() {
     clear(tasksContainer)
     renderTasks(selectedList);
     checkDarkMode(darkMode);
+    checkBackground(chosenBackground);
 }
 
 function showListName(selectedList) {
@@ -185,17 +193,20 @@ function clear(element) {
 }
 
 function checkDarkMode(darkMode) {
-    console.log(darkMode)
     if(darkMode == "enabled") {
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");
+        quoteContainer.classList.remove("light-mode");
         sidebar.classList.add("dark-mode");
         mainTasksContainer.classList.add("dark-mode");
+        quoteContainer.classList.add("dark-mode");
     } else if (darkMode == null) {
         sidebar.classList.remove("dark-mode");
         mainTasksContainer.classList.remove("dark-mode");
+        quoteContainer.classList.remove("dark-mode");
         sidebar.classList.add("light-mode");
         mainTasksContainer.classList.add("light-mode");
+        quoteContainer.classList.add("light-mode");
     }
 }
 
@@ -252,18 +263,33 @@ darkModeBtn.addEventListener("click", () => {
     if(darkMode == null) {
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");
+        quoteContainer.classList.remove("light-mode");
         sidebar.classList.add("dark-mode");
         mainTasksContainer.classList.add("dark-mode");
+        quoteContainer.classList.add("dark-mode");
         darkMode = "enabled";
     } else if (darkMode == "enabled") {
         sidebar.classList.remove("dark-mode");
         mainTasksContainer.classList.remove("dark-mode");
+        quoteContainer.classList.remove("dark-mode");
         sidebar.classList.add("light-mode");
         mainTasksContainer.classList.add("light-mode");
+        quoteContainer.classList.add("light-mode");
         darkMode = null;
     }
     save();
 })
+
+
+
+function checkBackground(chosenBackground) {
+    let options = document.querySelectorAll("option");
+    options = Array.from(options);
+    let selectedValue = options.find(item => item.value == chosenBackground);
+    selectedValue.selected = true;
+    document.body.style.backgroundImage = chosenBackground;
+    save();
+}
 
 
 render();
