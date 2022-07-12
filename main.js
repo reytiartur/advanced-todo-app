@@ -3,12 +3,13 @@ const LOCAL_STORAGE_SELECTED_LIST_ID = "task.selectedListID"
 const LOCAL_STORAGE_TASKS = "task.tasks"
 const LOCAL_STORAGE_DARK_MODE = "mode.darkMode"
 const LOCAL_STORAGE_CHOSEN_BG = "theme.chosenBackground"
+const LOCAL_STORAGE_FILTERED_LIST = "task.filtered"
 
 let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
 let darkMode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DARK_MODE));
 let chosenBackground = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CHOSEN_BG)) || "url(./images/ancient1.jpg)";
-
+let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST))
 
 let sidebar = document.querySelector("[data-sidebar]");
 let listsContainer = document.querySelector("[data-lists]");
@@ -22,12 +23,14 @@ let tasksContainer = document.querySelector("[data-tasks]");
 let listName = document.querySelector("[data-list-name]");
 let listTasksCount = document.querySelector("[data-list-count]");
 
+
 let quoteContainer = document.querySelector("[data-quote-container]");
 
 let deleteBtn = document.querySelectorAll(".delete-btn");
 let newQuoteBtn = document.querySelector(".new-quote");
 let darkModeBtn = document.querySelector(".light-dark-mode");
 let themeChanger = document.querySelector("#theme");
+let filterBtn = document.querySelector(".filter");
 
 
 listsContainer.addEventListener("click", e => {
@@ -89,6 +92,34 @@ themeChanger.addEventListener('change', function() {
     saveAndRender()
 });
 
+filterBtn.addEventListener("click", (e) => {
+    
+    const selectedList = lists.find(list => list.id === selectedListID);
+    let createdTask = document.querySelectorAll("[data-task-id]");
+
+    if(e.target.classList.contains("show-all")) {
+        filteredList.tasks = selectedList.tasks
+    } else if(e.target.classList.contains("show-done")) {
+        filteredList.tasks = selectedList.tasks.filter(task => {
+            for(let current of createdTask) {
+                if (current.dataset.taskId == task.id && task.done) {
+                    return true;
+                }}})
+    } else if(e.target.classList.contains("show-active")) {
+        {
+            filteredList.tasks = selectedList.tasks.filter(task => {
+                for(let current of createdTask) {
+                    if (current.dataset.taskId == task.id && !task.done) {
+                        return true;
+                    }}})
+    }}
+    console.log(filteredList)
+    clear(tasksContainer)
+    save()
+    renderTasks(filteredList);
+    // render something
+})
+
 function createList(name) {
     return { id: Date.now().toString(),
             name: name,
@@ -113,6 +144,7 @@ function save() {
     localStorage.setItem(LOCAL_STORAGE_SELECTED_LIST_ID, selectedListID)
     localStorage.setItem(LOCAL_STORAGE_DARK_MODE, JSON.stringify(darkMode))
     localStorage.setItem(LOCAL_STORAGE_CHOSEN_BG, JSON.stringify(chosenBackground))
+    localStorage.setItem(LOCAL_STORAGE_FILTERED_LIST, JSON.stringify(filteredList))
 }
 
 function render() {
