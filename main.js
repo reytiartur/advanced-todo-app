@@ -88,36 +88,25 @@ newTaskForm.addEventListener("submit", e => {
 themeChanger.addEventListener('change', function() {
     document.body.style.backgroundImage = this.value;
     chosenBackground = this.value;
-    console.log(this.value)
     saveAndRender()
 });
 
 filterBtn.addEventListener("click", (e) => {
     
     const selectedList = lists.find(list => list.id === selectedListID);
-    let createdTask = document.querySelectorAll("[data-task-id]");
 
     if(e.target.classList.contains("show-all")) {
         filteredList.tasks = selectedList.tasks
     } else if(e.target.classList.contains("show-done")) {
-        filteredList.tasks = selectedList.tasks.filter(task => {
-            for(let current of createdTask) {
-                if (current.dataset.taskId == task.id && task.done) {
-                    return true;
-                }}})
+        filteredList.tasks = selectedList.tasks.filter(task => task.done)
     } else if(e.target.classList.contains("show-active")) {
         {
-            filteredList.tasks = selectedList.tasks.filter(task => {
-                for(let current of createdTask) {
-                    if (current.dataset.taskId == task.id && !task.done) {
-                        return true;
-                    }}})
+        filteredList.tasks = selectedList.tasks.filter(task => !task.done)
     }}
-    console.log(filteredList)
-    clear(tasksContainer)
-    save()
+
+    clear(tasksContainer);
+    save();
     renderTasks(filteredList);
-    // render something
 })
 
 function createList(name) {
