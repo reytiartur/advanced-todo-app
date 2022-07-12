@@ -197,7 +197,9 @@ function renderTasks(selectedList) {
             <label for="${task.id}"><span class="custom-checkbox"></span>${task.name}<button class="delete-btn">x</button></label>    
         `;
         taskInner.classList.add("task");
+        taskInner.classList.add("draggable-task");
         taskInner.dataset.taskId = task.id;
+        taskInner.setAttribute('draggable', true);
 
         let deleteBtn = taskInner.querySelector(".delete-btn");
         deleteBtn.id = task.id;
@@ -206,6 +208,11 @@ function renderTasks(selectedList) {
         checkbox.id = task.id;
         checkbox.checked = task.done;
         tasksContainer.appendChild(taskInner);
+    })
+
+    new Sortable(tasksContainer, {
+        animation: 150,
+        ghostClass: 'dragBg'
     })
 }
 
@@ -280,7 +287,6 @@ newQuoteBtn.addEventListener("click", () => {
     }
 
 darkModeBtn.addEventListener("click", () => {
-    console.log(darkMode)
     if(darkMode == null) {
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");

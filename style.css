@@ -383,6 +383,10 @@ button.plus:hover {
     color: var(--text-light);
 }
 
+.dragBg {
+    background-color: rgba(184, 176, 176, 0.5);
+}
+
 /* @media (max-width: 768px) {
 
 }
