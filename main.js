@@ -25,12 +25,14 @@ let listTasksCount = document.querySelector("[data-list-count]");
 
 
 let quoteContainer = document.querySelector("[data-quote-container]");
+let pen = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-230 -220 900 900"><path d="M421.7 220.3L188.5 453.4L154.6 419.5L158.1 416H112C103.2 416 96 408.8 96 400V353.9L92.51 357.4C87.78 362.2 84.31 368 82.42 374.4L59.44 452.6L137.6 429.6C143.1 427.7 149.8 424.2 154.6 419.5L188.5 453.4C178.1 463.8 165.2 471.5 151.1 475.6L30.77 511C22.35 513.5 13.24 511.2 7.03 504.1C.8198 498.8-1.502 489.7 .976 481.2L36.37 360.9C40.53 346.8 48.16 333.9 58.57 323.5L291.7 90.34L421.7 220.3zM492.7 58.75C517.7 83.74 517.7 124.3 492.7 149.3L444.3 197.7L314.3 67.72L362.7 19.32C387.7-5.678 428.3-5.678 453.3 19.32L492.7 58.75z"/></svg>`
 
 let deleteBtn = document.querySelectorAll(".delete-btn");
 let newQuoteBtn = document.querySelector(".new-quote");
 let darkModeBtn = document.querySelector(".light-dark-mode");
 let themeChanger = document.querySelector("#theme");
 let filterBtn = document.querySelector(".filter");
+let editBtn = document.querySelectorAll(".edit-btn > *");
 
 
 listsContainer.addEventListener("click", e => {
@@ -109,6 +111,21 @@ filterBtn.addEventListener("click", (e) => {
     renderTasks(filteredList);
 })
 
+
+
+tasksContainer.addEventListener("click", (e) => {
+    let element;
+    if(e.target.tagName.toLowerCase() == "path") {
+        element = e.target.parentNode.parentNode.previousElementSibling;
+    } else if (e.target.tagName.toLowerCase() == "svg") {
+        element = e.target.parentNode.previousElementSibling;
+    } else if(e.target.className == "edit-btn") {
+        element = e.target.previousElementSibling;
+    }
+
+    changeTaskText(element);
+})
+
 function createList(name) {
     return { id: Date.now().toString(),
             name: name,
@@ -168,9 +185,9 @@ function showTasksCount(selectedList) {
 function renderLists() {
     // if(lists.length < 1) {
     //     mainTasksContainer.style.opacity = 0;
-    // } else {
-    lists.forEach(item => {
+    // } else { 
         // mainTasksContainer.style.opacity = 1;
+    lists.forEach(item => {
         const list = document.createElement("li");
         list.classList.add("list");
         list.dataset.listId = item.id;
@@ -194,10 +211,9 @@ function renderTasks(selectedList) {
         let taskInner = document.createElement("div");
         taskInner.innerHTML = `
             <input type="checkbox" id="${task.id}">
-            <label for="${task.id}"><span class="custom-checkbox"></span><p>${task.name}</p><button class="delete-btn">x</button></label>    
+            <label for="${task.id}"><span class="custom-checkbox"></span><input type="text" readonly="true" class="text" value="${task.name}"></input><button class="edit-btn">${pen}</button><button class="delete-btn">x</button></label>    
         `;
         taskInner.classList.add("task");
-        taskInner.classList.add("draggable-task");
         taskInner.dataset.taskId = task.id;
         taskInner.setAttribute('draggable', true);
 
@@ -318,5 +334,13 @@ function checkBackground(chosenBackground) {
     save();
 }
 
+function changeTaskText(element) {
+    if(element.hasAttribute("readonly")) {
+        element.removeAttribute("readonly")
+        element.focus();
+    } else if(!element.hasAttribute("readonly")) {
+        element.setAttribute("readonly", true) 
+    }
+}
 
 render();
