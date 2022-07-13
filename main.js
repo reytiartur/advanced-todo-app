@@ -194,7 +194,7 @@ function renderTasks(selectedList) {
         let taskInner = document.createElement("div");
         taskInner.innerHTML = `
             <input type="checkbox" id="${task.id}">
-            <label for="${task.id}"><span class="custom-checkbox"></span>${task.name}<button class="delete-btn">x</button></label>    
+            <label for="${task.id}"><span class="custom-checkbox"></span><p>${task.name}</p><button class="delete-btn">x</button></label>    
         `;
         taskInner.classList.add("task");
         taskInner.classList.add("draggable-task");
