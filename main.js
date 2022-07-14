@@ -211,7 +211,7 @@ function renderTasks(selectedList) {
         let taskInner = document.createElement("div");
         taskInner.innerHTML = `
             <input type="checkbox" id="${task.id}">
-            <label for="${task.id}"><span class="custom-checkbox"></span><input type="text" readonly="true" class="text" value="${task.name}"></input><button class="edit-btn">${pen}</button><button class="delete-btn">x</button></label>    
+            <label for="${task.id}"><span class="custom-checkbox"></span>${task.name}<button class="delete-btn">x</button></label>    
         `;
         taskInner.classList.add("task");
         taskInner.dataset.taskId = task.id;
