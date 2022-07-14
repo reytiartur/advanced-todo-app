@@ -237,14 +237,24 @@ svg:hover {
     margin: .75rem 0;
 }
 
+.filter {
+    display: flex;
+    align-items: center;
+    padding-inline: 2rem;
+}
+
 .show {
-    margin: .5rem .75rem .75rem .75rem;
+    margin: .5rem 1rem .5rem 1rem;
     background: none;
     border: none;
     transition: 200ms ease-out;
     font-weight: 700;
     font-size: 15px;
     color: var(--border-color);
+}
+
+.show.clear-done {
+    margin-left: auto;
 }
 
 .show:hover, 

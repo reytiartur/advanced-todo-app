@@ -93,17 +93,18 @@ themeChanger.addEventListener('change', function() {
 
 filterBtn.addEventListener("click", (e) => {
     
-    const selectedList = lists.find(list => list.id === selectedListID);
+    let selectedList = lists.find(list => list.id === selectedListID);
 
     if(e.target.classList.contains("show-all")) {
         filteredList.tasks = selectedList.tasks
     } else if(e.target.classList.contains("show-done")) {
         filteredList.tasks = selectedList.tasks.filter(task => task.done)
     } else if(e.target.classList.contains("show-active")) {
-        {
         filteredList.tasks = selectedList.tasks.filter(task => !task.done)
-    }}
-
+    } else if(e.target.classList.contains("clear-done")) {
+        selectedList.tasks = selectedList.tasks.filter(task => !task.done)
+        filteredList.tasks = selectedList.tasks;
+    }
     clear(tasksContainer);
     save();
     renderTasks(filteredList);
@@ -194,12 +195,11 @@ function renderTasks(selectedList) {
         let taskInner = document.createElement("div");
         taskInner.innerHTML = `
             <input type="checkbox" id="${task.id}">
-            <label for="${task.id}"><span class="custom-checkbox"></span><p>${task.name}</p><button class="delete-btn">x</button></label>    
+            <label for="${task.id}"><span class="custom-checkbox"></span><p class="task-text">${task.name}</p><button class="delete-btn">x</button></label>    
         `;
         taskInner.classList.add("task");
         taskInner.classList.add("draggable-task");
         taskInner.dataset.taskId = task.id;
-        taskInner.setAttribute('draggable', true);
 
         let deleteBtn = taskInner.querySelector(".delete-btn");
         deleteBtn.id = task.id;
