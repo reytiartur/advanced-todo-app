@@ -56,6 +56,10 @@ h1 {
     margin: 0;
 }
 
+.menu {
+    display: none;
+}
+
 .main-container {
     height: 65vh;  
     display: flex;
@@ -482,17 +486,43 @@ button.plus:hover {
         height: 100vh;
     }
 
+    .header {
+        width: 90%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin: 1rem auto .5rem auto;
+    }
+
     h1 {
         font-size: 28px;
+        width: 50%;
+    }
+
+    .menu {
+        display: block;
     }
 
     .main-container {
         height: 70%;
         width: 99%;
+        position: relative;
+        margin-inline: auto;
+        /* transition: ; */
     }
 
     .sidebar {
         display: none;
+        position: absolute;
+        top: 5px;
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+        z-index: 99;
+        width: auto;
+        margin: 0;
+        border-radius: 12px;
+        /* transform: */
     }
 
     .main {
@@ -516,6 +546,11 @@ button.plus:hover {
     .tasks-container{
         font-size: 20px;
         height: 70%;
+    }
+
+    .custom-checkbox {
+        flex: 0 0 1em;
+        height: 1em;
     }
 
     .edit-btn {
