@@ -219,7 +219,8 @@ svg:hover {
     margin-bottom: .75rem;
     display: flex;
     align-items: center;
-    width: 80%;
+    width: 95%;
+    margin-inline: auto;
 }
 
 .task label {
