@@ -31,6 +31,18 @@ body {
     flex-direction: column;
 }
 
+body::after {
+  content: "";
+  background: var(--border-color);
+  opacity: 0.3;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
 .header {
     margin: calc(var(--spacing) / 2) var(--spacing);
     align-self: center;
@@ -71,6 +83,11 @@ h1 {
     margin-bottom: 1rem;
     letter-spacing: 2px;
     font-size: 22px;
+}
+
+.lists ul {
+    overflow-y: auto;
+    height: 75%;
 }
 
 .make-list {
@@ -194,6 +211,7 @@ svg:hover {
     align-items: flex-start;
     height: 65%;
     font-size: 24px;
+    overflow-y: auto;
 }
 
 .task {
@@ -423,6 +441,24 @@ button.plus:hover {
 
 .dragBg {
     background-color: rgba(184, 176, 176, 0.5);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    background: #777777;
+    border-radius: 15px;
+}
+  
+::-webkit-scrollbar-thumb {
+    background: rgb(29, 28, 28);
+    border-radius: 15px;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(0, 0, 0);
 }
 
 /* @media (max-width: 768px) {
