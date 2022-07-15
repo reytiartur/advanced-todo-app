@@ -57,9 +57,7 @@ h1 {
 }
 
 .main-container {
-    margin-left: var(--spacing);
-    margin-right: var(--spacing);
-    height: 55vh;  
+    height: 65vh;  
     display: flex;
 }
 
@@ -224,7 +222,7 @@ svg:hover {
 }
 
 .task label {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     position: relative;
     padding-bottom: 4px;
@@ -357,7 +355,7 @@ svg:hover {
 .custom-checkbox {
     --checkbox-size: .75em;
     display: inline-block;
-    width: var(--checkbox-size);
+    flex: 0 0 var(--checkbox-size);
     height: var(--checkbox-size);
     cursor: pointer;
     border: 2px solid var(--border-color);
@@ -462,6 +460,97 @@ button.plus:hover {
     background: rgb(0, 0, 0);
 }
 
-/* @media (max-width: 768px) {
+@media (max-width: 1400px) {
+    .sidebar {
+        width: 25%;
+    }
 
+    .main {
+        width: 55%;
+    }
+
+    .quote-container {
+        width: 70%;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        background-size: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: 100vh;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .main-container {
+        height: 70%;
+        width: 99%;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        width: 98%;
+        font-size: 16px;
+        padding: 12px;
+        border-radius: 6px;
+        width: 90%;
+        margin: 0.5rem auto;
+    }
+
+    .main h2 {
+        margin: 0;
+    }
+
+    .tasks-header {
+        padding-block: 16px;
+        padding-inline: 10px;
+    }
+
+    .tasks-container{
+        font-size: 20px;
+        height: 70%;
+    }
+
+    .edit-btn {
+        font-size: 16px;
+    }
+
+    .delete-btn {
+        font-size: 16px;
+    }
+
+    .main-container form {
+        width: fit-content;
+        margin-inline: auto;
+        margin-block: 20px;
+    }
+
+    .main-container input {
+        width: 90%;
+    }
+
+    .filter {
+        padding: 0 10px;
+
+    }
+
+    button.show {
+        font-size: 14px;
+        margin: 10px 5px;
+    }
+
+    .quote-container {
+        width: 90%;
+        padding: 0.75rem;
+        margin: .5rem 0;
+        margin-top: auto;
+        font-size: 18px;
+    }
 }
