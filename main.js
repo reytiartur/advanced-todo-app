@@ -137,13 +137,13 @@ menuBtn.addEventListener("click", (e) => {
         mainTasksContainer.classList.toggle("showup-animation");
         sidebar.classList.toggle("showup-animation");
         // mainTasksContainer.style.display = "none";
-        menuBtn.innerHTML = cross;
+        menuBtn.innerHTML = "&#10006;"
     } else if (mainTasksContainer.classList.contains("showup-animation")) {
         // mainTasksContainer.style.display = "block";
         sidebar.classList.toggle("showup-animation");
         mainTasksContainer.classList.toggle("showup-animation");
         // sidebar.style.display = "none";
-        menuBtn.innerHTML = "&#10006;"
+        menuBtn.innerHTML = cross;
     }
 })
 

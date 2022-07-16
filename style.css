@@ -61,7 +61,7 @@ h1 {
 }
 
 .main-container {
-    height: 65vh;  
+    height: 60vh;  
     display: flex;
 }
 
@@ -223,6 +223,10 @@ svg:hover {
     align-items: center;
     width: 95%;
     margin-inline: auto;
+}
+
+.task-text {
+    outline: none;
 }
 
 .task label {
@@ -480,10 +484,12 @@ button.plus:hover {
 
 @media (max-width: 768px) {
     body {
-        background-size: auto;
+        background-size:auto;
         overflow-y: auto;
         overflow-x: hidden;
-        height: 100vh;
+        height: 99vh;
+        max-height: 99vh;
+        max-width: 99vw;
     }
 
     .header {
@@ -508,10 +514,10 @@ button.plus:hover {
         width: 99%;
         position: relative;
         margin-inline: auto;
+        overflow: hidden;
     }
 
     .sidebar {
-        /* display: none; */
         position: absolute;
         top: 5px;
         bottom: 5px;
@@ -577,10 +583,6 @@ button.plus:hover {
     .custom-checkbox {
         flex: 0 0 1em;
         height: 1em;
-    }
-
-    .task-text {
-        outline: none;
     }
 
     .edit-btn {
