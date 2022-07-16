@@ -508,11 +508,10 @@ button.plus:hover {
         width: 99%;
         position: relative;
         margin-inline: auto;
-        /* transition: ; */
     }
 
     .sidebar {
-        display: none;
+        /* display: none; */
         position: absolute;
         top: 5px;
         bottom: 5px;
@@ -522,16 +521,25 @@ button.plus:hover {
         width: auto;
         margin: 0;
         border-radius: 12px;
-        /* transform: */
+        transform: translateX(1000px);
+        transition: transform 500ms ease-out; 
     }
 
     .main {
         width: 98%;
         font-size: 16px;
         padding: 12px;
-        border-radius: 6px;
+        border-radius: 12px;
         width: 90%;
         margin: 0.5rem auto;
+        transform: translateX(-1000px);
+        transition: transform 500ms ease-out;
+    }
+
+    .showup-animation {
+        transform: translateX(0);
+        transition: transform 500ms ease-out;
+
     }
 
     .main h2 {

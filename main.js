@@ -132,15 +132,18 @@ tasksContainer.addEventListener("click", (e) => {
     }})
 
 menuBtn.addEventListener("click", (e) => {
-    if(window.getComputedStyle(sidebar).display === "none") {
-        sidebar.style.display = "block";
-        mainTasksContainer.style.display = "none";
-        menuBtn.innerHTML = "&#10006;"
-    } else if (window.getComputedStyle(mainTasksContainer).display === "none") {
-        console.log(1)
-        mainTasksContainer.style.display = "block";
-        sidebar.style.display = "none";
+    if(sidebar.classList.contains("showup-animation")) {
+        // sidebar.style.display = "block";
+        mainTasksContainer.classList.toggle("showup-animation");
+        sidebar.classList.toggle("showup-animation");
+        // mainTasksContainer.style.display = "none";
         menuBtn.innerHTML = cross;
+    } else if (mainTasksContainer.classList.contains("showup-animation")) {
+        // mainTasksContainer.style.display = "block";
+        sidebar.classList.toggle("showup-animation");
+        mainTasksContainer.classList.toggle("showup-animation");
+        // sidebar.style.display = "none";
+        menuBtn.innerHTML = "&#10006;"
     }
 })
 
