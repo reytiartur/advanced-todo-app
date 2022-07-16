@@ -525,6 +525,24 @@ button.plus:hover {
         transition: transform 500ms ease-out; 
     }
 
+    .make-list {
+        flex-direction: column;
+    }
+
+    .make-list h3 {
+        margin: 1rem 0;
+    }
+
+    .make-list form {
+        width: fit-content;
+        margin-inline: auto;
+        margin-block: 0.5rem;
+    }
+
+    .make-list input {
+        width: 80%;
+    }
+
     .main {
         width: 98%;
         font-size: 16px;
@@ -539,11 +557,11 @@ button.plus:hover {
     .showup-animation {
         transform: translateX(0);
         transition: transform 500ms ease-out;
-
     }
 
     .main h2 {
         margin: 0;
+        font-size: 1.75rem;
     }
 
     .tasks-header {
@@ -561,6 +579,10 @@ button.plus:hover {
         height: 1em;
     }
 
+    .task-text {
+        outline: none;
+    }
+
     .edit-btn {
         font-size: 16px;
     }
@@ -569,23 +591,26 @@ button.plus:hover {
         font-size: 16px;
     }
 
-    .main-container form {
+    .main form {
         width: fit-content;
         margin-inline: auto;
-        margin-block: 20px;
+        margin-block: 1rem;
     }
 
-    .main-container input {
+    .main input {
         width: 90%;
+    }
+
+    .main input:focus {
+        outline: none;
     }
 
     .filter {
         padding: 0 10px;
-
     }
 
     button.show {
-        font-size: 14px;
+        font-size: 16px;
         margin: 10px 5px;
     }
 
@@ -595,5 +620,14 @@ button.plus:hover {
         margin: .5rem 0;
         margin-top: auto;
         font-size: 18px;
+    }
+
+    .options {
+        margin: auto 0 1.25rem 0;
+        font-size: 18px;
+    }
+
+    .new-quote {
+        margin-bottom: 1.5rem;
     }
 }
