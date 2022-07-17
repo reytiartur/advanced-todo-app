@@ -2,8 +2,11 @@
 --spacing: 3rem;
 --padding-container: 2rem;
 --border-color: rgb(174, 174, 174);
+font-family: 'Edu SA Beginner', cursive;
 
 --inside-shadow: inset 0 -8px 6px -6px rgba(0, 0, 0, 0.161);
+--mango: #FC814A;
+--fuchsia: #875c74;
 
 /* Light */
 --bg-container-light: rgba(225, 225, 225, 0.8);
@@ -54,6 +57,7 @@ body::after {
 
 h1 {
     margin: 0;
+    font-family: 'Permanent Marker', cursive;
 }
 
 .menu {
@@ -99,6 +103,8 @@ h1 {
 
 .make-list h3 {
     flex: 1 0 content;
+    font-weight: bolder;
+    font-size: 1.5rem;
 }
 
 .make-list form {
@@ -112,6 +118,8 @@ h1 {
     margin-bottom: 6px;
     width: fit-content;
     transition: transform 200ms ease-in;
+    font-size: 22px;
+    padding: 6px 10px 1px 5px;
 }
 
 .list:hover {
@@ -144,12 +152,12 @@ h1 {
     margin-left: 8px;
     background: none;
     border: none;
-    border-bottom: var(--border-color) solid 2px;
+    border-bottom: var(--fuchsia) solid 2px;
 }
 
 .options #theme:hover {
     cursor: pointer;
-    box-shadow: var(--inside-shadow);
+    box-shadow: var(--mango);
 }
 
 .options #theme:focus {
@@ -179,13 +187,14 @@ svg:hover {
     margin-bottom: 2rem;
     padding: .5rem;
     font-size: 24px;
-    border: none;
-    border-bottom: var(--border-color) 2px solid;
+    border: solid 2px var(--fuchsia);
+    border-radius: 10px;
     background: none;
     cursor: pointer;
 }
 
 .new-quote:hover {
+    border-color: var(--mango);
     box-shadow: var(--inside-shadow);
 }
 
@@ -211,36 +220,43 @@ svg:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 65%;
+    height: 60%;
     font-size: 24px;
     overflow-y: auto;
+    border: var(--mango) 1px solid;
+    border-radius: 12px;
+    padding: 2px 0;
 }
 
 .task {
     cursor: pointer;
-    margin-bottom: .75rem;
+    margin-bottom: .25rem;
     display: flex;
     align-items: center;
     width: 95%;
     margin-inline: auto;
+    padding: 10px 10px;
+    border: var(--fuchsia) 1px solid;
+    border-radius: 10px;
+    transition: 200ms ease-in;
 }
 
 .task-text {
     outline: none;
+    height: fit-content;
+    padding-bottom: 5px;
 }
 
 .task label {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     position: relative;
-    padding-bottom: 4px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.156);
     width: 100%;
-    cursor: pointer;
+    cursor: pointer; 
 }
 
-.task label:hover{
-    box-shadow: var(--inside-shadow);
+.task:hover{
+    border: var(--mango) 1px solid;
 }
 
 .edit-btn {
@@ -248,7 +264,7 @@ svg:hover {
     border: none;
     margin-left: auto;
     height: 25px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 600;
     transition: 200ms ease-in;
 }
@@ -285,32 +301,45 @@ svg:hover {
 }
 
 .show {
-    margin: .5rem 1rem .5rem 1rem;
+    width: 5rem;
+    padding: .5rem;
+    margin: .5rem;
     background: none;
     border: none;
-    transition: 200ms ease-out;
+    transition: 250ms ease-out;
     font-weight: 700;
     font-size: 15px;
     color: var(--border-color);
+    border: 1px var(--border-color) solid;
+    border-radius: 8px;
 }
 
 .show.clear-done {
     margin-left: auto;
-    transition: 150ms ease-in;
+    transition: 250ms ease-in-out;
+    width: 7rem;
 }
 
-.show.clear-done:hover {
+.show.clear-done:hover > p {
     transform: scale(1.1);
     color: rgb(190, 25, 25);
     cursor: pointer;
 }
 
-.show:hover, 
+.show.clear-done:focus {
+    color: var(--border-color);
+    border: 1px var(--border-color) solid;
+}
+
+.show:hover {
+    color: black;
+    border-color: var(--fuchsia);
+    cursor: pointer;
+    font-weight: 900;
+} 
+
 .show:focus {
     color: black;
-    cursor: pointer;
-    opacity: 1;
-    font-weight: 900;
 }
 
 /* Quotes */
@@ -327,10 +356,12 @@ svg:hover {
     backdrop-filter: blur(3px);
     border: var(--border-color) 1px solid;
     border-radius: 16px;
+    font-family: 'Dancing Script', cursive;
 }
 
 .quote {
     margin: 0;
+    font-weight: 600;
 }
 
 .person {
@@ -346,27 +377,13 @@ svg:hover {
     position: absolute;
 }
 
-
-/* Custom line through on checked - appears on layout, but cant be seen 
-     .task label::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: calc(50% - 1.5px);
-    height: 3px;
-    opacity: 0.5;
-    color: black;
-    z-index: 5;
-} */
-
 .custom-checkbox {
     --checkbox-size: .75em;
     display: inline-block;
     flex: 0 0 var(--checkbox-size);
     height: var(--checkbox-size);
     cursor: pointer;
-    border: 2px solid var(--border-color);
+    border: 2px solid var(--fuchsia);
     border-radius: 50%;
     margin-right: var(--checkbox-size);
     transform: scale(1);
@@ -378,8 +395,8 @@ svg:hover {
 }
 
 [type="checkbox"]:checked + label .custom-checkbox {
-    background: var(--border-color);
-    box-shadow: inset 0 0 0px 1px white;
+    background: var(--fuchsia);
+    box-shadow: inset 0 0 0px 1px var(--mango);
 }
 
 [type="checkbox"]:checked + label p{
@@ -395,7 +412,7 @@ input[type="text"] {
     padding-left: 8px;
     margin-right: 8px;
     border: none;
-    border-bottom: var(--border-color) solid 2px;
+    border-bottom: var(--fuchsia) solid 2px;
     background: none;
 }
 
@@ -408,7 +425,7 @@ input[type="text"]:hover {
 input[type="text"]:focus {
     outline: none;
     opacity: 1;
-    border-bottom: rgba(0, 0, 0, 0.5) solid 3px;
+    border-bottom: var(--mango) solid 3px;
     box-shadow: var(--inside-shadow);
 }
 
@@ -420,6 +437,7 @@ form {
 button.plus{
     background: none;
     border: none;
+    font-family: sans-serif;
     font-size: 24px;
     font-weight: 900;
     cursor: pointer;
@@ -433,7 +451,12 @@ button.plus:hover {
 .active-list {
     transform:translateX(20px);
     cursor: pointer;
-    border-bottom: black solid 3px;
+    border-bottom: var(--mango) solid 3px;
+}
+
+.active-filter {
+    border-color: var(--mango);
+    color: black;
 }
 
 .dark-mode {
@@ -448,6 +471,13 @@ button.plus:hover {
 
 .dragBg {
     background-color: rgba(184, 176, 176, 0.5);
+}
+
+button,
+input,
+select,
+option {
+    font-family: 'Edu SA Beginner', cursive;
 }
 
 ::-webkit-scrollbar {
@@ -480,9 +510,14 @@ button.plus:hover {
     .quote-container {
         width: 70%;
     }
+
+    .task {
+        width: 92%;
+    }
+
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
     body {
         background-size:auto;
         overflow-y: auto;
@@ -596,7 +631,7 @@ button.plus:hover {
     .main form {
         width: fit-content;
         margin-inline: auto;
-        margin-block: 1rem;
+        margin-block: .5rem;
     }
 
     .main input {
@@ -609,10 +644,15 @@ button.plus:hover {
 
     .filter {
         padding: 0 10px;
+        justify-content: center;
     }
 
     button.show {
         font-size: 16px;
+        margin: 10px 5px;
+    }
+
+    .show.clear-done {
         margin: 10px 5px;
     }
 
