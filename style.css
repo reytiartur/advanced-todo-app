@@ -225,7 +225,7 @@ svg:hover {
     overflow-y: auto;
     border: var(--mango) 1px solid;
     border-radius: 12px;
-    padding: 2px 0;
+    padding: 4px 0;
 }
 
 .task {

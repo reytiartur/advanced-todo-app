@@ -112,7 +112,6 @@ filterBtn.addEventListener("click", (e) => {
         e.target.classList.add("active-filter")
         filteredList.tasks = selectedList.tasks.filter(task => !task.done)
     } else if(e.target.classList.contains("clear-done") || e.target.tagName.toLowerCase() == "p") {
-        console.log(1)
         selectedList.tasks = selectedList.tasks.filter(task => !task.done)
         filteredList.tasks = selectedList.tasks;
     }
@@ -231,7 +230,6 @@ function renderLists() {
         list.tasks = item.tasks;
         if(list.dataset.listId === selectedListID) {
             list.classList.add("active-list");
-
             let deleteBtn = document.createElement("button");
             deleteBtn.classList.add("delete-btn");
             deleteBtn.innerHTML = "&#10006;";
@@ -264,9 +262,23 @@ function renderTasks(selectedList) {
         tasksContainer.appendChild(taskInner);
     })
 
-    new Sortable(tasksContainer, {
+    Sortable.create(tasksContainer, {
         animation: 150,
-        ghostClass: 'dragBg'
+        ghostClass: 'dragBg',
+        onUpdate: function checkOrder() {
+            const selectedList = lists.find(list => list.id === selectedListID);
+            let newOrder = [];
+            let tasks = document.querySelectorAll("[data-task-id]");
+            tasks.forEach(taskDiv => {
+                for(let task of selectedList.tasks) {
+                    if(taskDiv.dataset.taskId == task.id) {
+                        newOrder.push(task)
+                    }
+                }
+            })
+            selectedList.tasks = newOrder;
+            save()
+        }
     })
 }
 
