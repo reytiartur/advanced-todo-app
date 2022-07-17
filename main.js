@@ -9,7 +9,7 @@ let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
 let darkMode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DARK_MODE));
 let chosenBackground = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CHOSEN_BG)) || "url(./images/ancient1.jpg)";
-let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST))
+let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST)) || [];
 
 let sidebar = document.querySelector("[data-sidebar]");
 let listsContainer = document.querySelector("[data-lists]");
@@ -97,6 +97,8 @@ themeChanger.addEventListener('change', function() {
 filterBtn.addEventListener("click", (e) => {
     
     let selectedList = lists.find(list => list.id === selectedListID);
+    console.log(selectedList)
+    console.log(filteredList)
     
     
     if(e.target.classList.contains("show-all")) {
@@ -266,17 +268,17 @@ function renderTasks(selectedList) {
         animation: 150,
         ghostClass: 'dragBg',
         onUpdate: function checkOrder() {
-            const selectedList = lists.find(list => list.id === selectedListID);
+            const currentList = lists.find(list => list.id === selectedListID);
             let newOrder = [];
             let tasks = document.querySelectorAll("[data-task-id]");
             tasks.forEach(taskDiv => {
-                for(let task of selectedList.tasks) {
+                for(let task of currentList.tasks) {
                     if(taskDiv.dataset.taskId == task.id) {
                         newOrder.push(task)
                     }
                 }
             })
-            selectedList.tasks = newOrder;
+            currentList.tasks = newOrder;
             save()
         }
     })
