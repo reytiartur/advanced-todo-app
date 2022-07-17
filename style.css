@@ -22,6 +22,10 @@ p {
     padding: 0;
 }
 
+::placeholder {
+    color: #939393;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -464,9 +468,19 @@ button.plus:hover {
     color: var(--text-dark);
 }
 
+.dark-mode-input {
+    color: var(--text-dark);
+    background: none;
+}
+
 .light-mode {
     background: var(--bg-container-light);
     color: var(--text-light);
+}
+
+.light-mode-input {
+    color: var(--text-light);
+    background: none;
 }
 
 .dragBg {

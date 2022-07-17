@@ -355,18 +355,35 @@ newQuoteBtn.addEventListener("click", () => {
     }
 
 darkModeBtn.addEventListener("click", () => {
+    let input = document.querySelectorAll("input");
+    let select = document.querySelectorAll("select");
+    let button = document.querySelectorAll("button");
     if(darkMode == null) {
+        input.forEach(item => item.classList.remove("light-mode-input"));
+        select.forEach(item => item.classList.remove("light-mode-input"));
+        button.forEach(item => item.classList.remove("light-mode-input"));
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");
         quoteContainer.classList.remove("light-mode");
+
+        input.forEach(item => item.classList.add("dark-mode-input"));
+        select.forEach(item => item.classList.add("dark-mode-input"));
+        button.forEach(item => item.classList.add("dark-mode-input"));
         sidebar.classList.add("dark-mode");
         mainTasksContainer.classList.add("dark-mode");
         quoteContainer.classList.add("dark-mode");
         darkMode = "enabled";
     } else if (darkMode == "enabled") {
+        input.forEach(item => item.classList.remove("dark-mode-input"));
+        select.forEach(item => item.classList.remove("dark-mode-input"));
+        button.forEach(item => item.classList.remove("dark-mode-input"));
         sidebar.classList.remove("dark-mode");
         mainTasksContainer.classList.remove("dark-mode");
         quoteContainer.classList.remove("dark-mode");
+
+        input.forEach(item => item.classList.add("light-mode-input"));
+        select.forEach(item => item.classList.add("light-mode-input"));
+        button.forEach(item => item.classList.add("light-mode-input"));
         sidebar.classList.add("light-mode");
         mainTasksContainer.classList.add("light-mode");
         quoteContainer.classList.add("light-mode");
