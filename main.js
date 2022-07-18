@@ -9,7 +9,7 @@ let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
 let darkMode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DARK_MODE));
 let chosenBackground = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CHOSEN_BG)) || "url(./images/ancient1.jpg)";
-let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST)) || [];
+let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST));
 
 let sidebar = document.querySelector("[data-sidebar]");
 let listsContainer = document.querySelector("[data-lists]");
@@ -50,7 +50,7 @@ listsContainer.addEventListener("click", e => {
 })
 
 tasksContainer.addEventListener("click", e => {
-    if(e.target.className === "delete-btn") {
+    if(e.target.classList.contains("delete-btn")) {
         deleteTask(e);
     }
 })
@@ -97,9 +97,6 @@ themeChanger.addEventListener('change', function() {
 filterBtn.addEventListener("click", (e) => {
     
     let selectedList = lists.find(list => list.id === selectedListID);
-    console.log(selectedList)
-    console.log(filteredList)
-    
     
     if(e.target.classList.contains("show-all")) {
         filterBtn.querySelectorAll(".show").forEach(btn => btn.classList.remove("active-filter"));
@@ -123,7 +120,7 @@ filterBtn.addEventListener("click", (e) => {
 })
 
 tasksContainer.addEventListener("click", (e) => {
-    if(e.target.className == "edit-btn") {
+    if(e.target.classList.contains("edit-btn")) {
         if(e.target.previousElementSibling.contentEditable == "false") {
             e.target.innerText = "Save"
             let text = e.target.previousElementSibling;
@@ -197,9 +194,10 @@ function render() {
     renderLists();
     showListName(selectedList);
     showTasksCount(selectedList);
-    clear(tasksContainer)
-    renderTasks(selectedList);
+    clear(tasksContainer);
     checkDarkMode(darkMode);
+    renderTasks(selectedList);
+    
     checkBackground(chosenBackground);
 }
 
@@ -264,6 +262,8 @@ function renderTasks(selectedList) {
         tasksContainer.appendChild(taskInner);
     })
 
+    checkDarkMode(darkMode);
+
     Sortable.create(tasksContainer, {
         animation: 150,
         ghostClass: 'dragBg',
@@ -289,21 +289,51 @@ function clear(element) {
 }
 
 function checkDarkMode(darkMode) {
+    let input = document.querySelectorAll("input");
+    let select = document.querySelectorAll("select");
+    let option = document.querySelectorAll("option");
+    let button = document.querySelectorAll("button");
+    let taskText = document.querySelectorAll(".task-text");
+
     if(darkMode == "enabled") {
+        input.forEach(item => item.classList.remove("light-mode-input"));
+        select.forEach(item => item.classList.remove("light-mode-input"));
+        option.forEach(item => item.classList.remove("light-mode"));
+        taskText.forEach(item => item.classList.remove("light-mode-input"));
+        button.forEach(item => item.classList.remove("light-mode-input"));
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");
         quoteContainer.classList.remove("light-mode");
+
+        input.forEach(item => item.classList.add("dark-mode-input"));
+        select.forEach(item => item.classList.add("dark-mode-input"));
+        option.forEach(item => item.classList.add("dark-mode"));
+        taskText.forEach(item => item.classList.add("dark-mode-input"));
+        button.forEach(item => item.classList.add("dark-mode-input"));
         sidebar.classList.add("dark-mode");
         mainTasksContainer.classList.add("dark-mode");
         quoteContainer.classList.add("dark-mode");
+
     } else if (darkMode == null) {
+        input.forEach(item => item.classList.remove("dark-mode-input"));
+        select.forEach(item => item.classList.remove("dark-mode-input"));
+        option.forEach(item => item.classList.remove("dark-mode"));
+        taskText.forEach(item => item.classList.remove("dark-mode-input"));
+        button.forEach(item => item.classList.remove("dark-mode-input"));
         sidebar.classList.remove("dark-mode");
         mainTasksContainer.classList.remove("dark-mode");
         quoteContainer.classList.remove("dark-mode");
+
+        input.forEach(item => item.classList.add("light-mode-input"));
+        select.forEach(item => item.classList.add("light-mode-input"));
+        option.forEach(item => item.classList.add("light-mode"));
+        taskText.forEach(item => item.classList.add("light-mode-input"));
+        button.forEach(item => item.classList.add("light-mode-input"));
         sidebar.classList.add("light-mode");
         mainTasksContainer.classList.add("light-mode");
         quoteContainer.classList.add("light-mode");
     }
+    save()
 }
 
 function deleteList(e) {
