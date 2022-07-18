@@ -44,7 +44,7 @@ listsContainer.addEventListener("click", e => {
 })
 
 listsContainer.addEventListener("click", e => {
-    if(e.target.className === "delete-btn") {
+    if(e.target.classList.contains("delete-btn")) {
         deleteList(e);
     }
 })
@@ -82,7 +82,7 @@ newTaskForm.addEventListener("submit", e => {
     if(taskName !== null || taskName !== "") {
         let newTask = createTask(taskName);
         newTaskInput.value = null;
-        let selectedList = lists.find(list => list.id == selectedListID);
+        let selectedList = lists.find(list => list.id == selectedListID) || lists[0];
         selectedList.tasks.push(newTask);
         saveAndRender();
     }
@@ -115,7 +115,6 @@ filterBtn.addEventListener("click", (e) => {
     } else if(e.target.classList.contains("clear-done") || e.target.tagName.toLowerCase() == "p") {
         selectedList.tasks = selectedList.tasks.filter(task => !task.done)
         filteredList.tasks = selectedList.tasks;
-        console.log(1);
     }
     clear(tasksContainer);
     save();
@@ -210,7 +209,7 @@ function showListName(selectedList) {
 }
 
 function showTasksCount(selectedList) {
-    if (selectedList.tasks.length == undefined || !selectedList.tasks) {
+    if (!selectedList || !selectedList.tasks) {
         listTasksCount.innerText = `0 tasks remaining`;
     } else {
     const activeTasks = selectedList.tasks.filter(task => !task.done).length;
@@ -220,29 +219,79 @@ function showTasksCount(selectedList) {
 }
 
 function renderLists() {
-    // if(lists.length < 1) {
-    //     mainTasksContainer.style.opacity = 0;
-    // } else {
-    lists.forEach(item => {
-        // mainTasksContainer.style.opacity = 1;
-        const list = document.createElement("li");
-        list.classList.add("list");
-        list.dataset.listId = item.id;
-        list.innerText = item.name;
-        list.tasks = item.tasks;
-        if(list.dataset.listId === selectedListID) {
-            list.classList.add("active-list");
-            let deleteBtn = document.createElement("button");
-            deleteBtn.classList.add("delete-btn");
-            deleteBtn.innerHTML = "&#10006;";
-            deleteBtn.style.marginLeft = "1rem";
-            list.append(deleteBtn);
-        }
-        listsContainer.append(list);
-    })}
-// }
+    let header = document.querySelector(".tasks-header");
+    let tasksContainer = document.querySelector(".tasks-container");
+    let filter = document.querySelector(".filter");
+    let selectedList = lists.find(list => list.id === selectedListID) || lists[0];
+
+    if(lists.length <= 0) {
+        newTaskForm.style.display = "none";
+        header.style.display = "none";
+        tasksContainer.style.display = "none";
+        filter.style.display = "none";
+    } else {
+        selectedListID = selectedList.id;
+        selectedList = lists.find(list => list.id === selectedListID);
+        
+        newTaskForm.style.display = "";
+        header.style.display = "";
+        tasksContainer.style.display = "";
+        filter.style.display = "";
+        
+        lists.forEach(item => {
+            const list = document.createElement("li");
+            list.classList.add("list");
+            list.dataset.listId = item.id;
+            list.innerText = item.name;
+            list.tasks = item.tasks;
+            if(list.dataset.listId === selectedListID) {
+                list.classList.add("active-list");
+                let deleteBtn = document.createElement("button");
+                deleteBtn.classList.add("delete-btn");
+                deleteBtn.innerHTML = "&#10006;";
+                deleteBtn.style.marginLeft = "1rem";
+                list.append(deleteBtn);
+            }
+            listsContainer.append(list);
+        })}
+        
+        save()
+        showListName(selectedList);
+        showTasksCount(selectedList);
+    };
+
+    // function renderLists() {
+    //     if(lists.length <= 0) {
+    //         clear(mainTasksContainer);
+    //         renderTasks();
+    //     } else {
+    //         mainTasksContainer.innerHTML = `
+    //             <div class="tasks-header">
+    //                 <h2 class="list-name" data-list-name></h2>
+    //                 <div class="remaining" data-list-count></div>
+    //             </div>
+    
+    //             <div class="tasks-container" data-tasks></div>
+    
+    //             <form action="" data-new-task-form>
+    //                 <input class="input-task" type="text" data-new-task-input placeholder="Add a task">
+    //                 <button class="task-button plus">+</button>
+    //             </form>
+    
+    //             <div class="filter">
+    //                 <button class="show show-all active-filter">All</button>
+    //                 <button class="show show-done">Done</button>
+    //                 <button class="show show-active">Active</button>
+    //                 <button class="show clear-done"><p>Clear Done</p></button>
+    //             </div>`
+    //     };
+
+    
+
 
 function renderTasks(selectedList) {
+    if(!selectedList) return;
+
     selectedList.tasks.forEach(task => {
         let taskInner = document.createElement("div");
         taskInner.innerHTML = `
@@ -339,19 +388,26 @@ function checkDarkMode(darkMode) {
 }
 
 function deleteList(e) {
+    console.log(lists)
     if(e.target.closest("li").classList.contains("list")) {
         let index = lists.findIndex(list => list.id == selectedListID);
         if (index > -1) {
             lists.splice(index, 1);
-            if(lists.length > 0) {
-                selectedListID = lists[index - 1].id;
-            } else {
-                selectedList = [];
-            }
+            console.log(lists)
         }
-        saveAndRender();
+
+        if(lists.length > 0) {
+            if(lists[index - 1]) {
+            selectedListID = lists[index - 1].id;
+            console.log(selectedListID)
+            } else if(lists[0]) {
+            selectedListID = lists[0].id;
+            } else {
+            selectedList = null;
+            }
+        }   
     }
-    
+    saveAndRender();
 }
 
 function deleteTask(e) {
