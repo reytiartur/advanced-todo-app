@@ -357,10 +357,12 @@ newQuoteBtn.addEventListener("click", () => {
 darkModeBtn.addEventListener("click", () => {
     let input = document.querySelectorAll("input");
     let select = document.querySelectorAll("select");
+    let option = document.querySelectorAll("option");
     let button = document.querySelectorAll("button");
     if(darkMode == null) {
         input.forEach(item => item.classList.remove("light-mode-input"));
         select.forEach(item => item.classList.remove("light-mode-input"));
+        option.forEach(item => item.classList.remove("light-mode"));
         button.forEach(item => item.classList.remove("light-mode-input"));
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");
@@ -368,6 +370,7 @@ darkModeBtn.addEventListener("click", () => {
 
         input.forEach(item => item.classList.add("dark-mode-input"));
         select.forEach(item => item.classList.add("dark-mode-input"));
+        option.forEach(item => item.classList.add("dark-mode"));
         button.forEach(item => item.classList.add("dark-mode-input"));
         sidebar.classList.add("dark-mode");
         mainTasksContainer.classList.add("dark-mode");
@@ -376,6 +379,7 @@ darkModeBtn.addEventListener("click", () => {
     } else if (darkMode == "enabled") {
         input.forEach(item => item.classList.remove("dark-mode-input"));
         select.forEach(item => item.classList.remove("dark-mode-input"));
+        option.forEach(item => item.classList.remove("dark-mode"));
         button.forEach(item => item.classList.remove("dark-mode-input"));
         sidebar.classList.remove("dark-mode");
         mainTasksContainer.classList.remove("dark-mode");
@@ -383,6 +387,7 @@ darkModeBtn.addEventListener("click", () => {
 
         input.forEach(item => item.classList.add("light-mode-input"));
         select.forEach(item => item.classList.add("light-mode-input"));
+        option.forEach(item => item.classList.add("light-mode"));
         button.forEach(item => item.classList.add("light-mode-input"));
         sidebar.classList.add("light-mode");
         mainTasksContainer.classList.add("light-mode");
