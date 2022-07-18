@@ -359,10 +359,12 @@ darkModeBtn.addEventListener("click", () => {
     let select = document.querySelectorAll("select");
     let option = document.querySelectorAll("option");
     let button = document.querySelectorAll("button");
+    let taskText = document.querySelectorAll(".task-text");
     if(darkMode == null) {
         input.forEach(item => item.classList.remove("light-mode-input"));
         select.forEach(item => item.classList.remove("light-mode-input"));
         option.forEach(item => item.classList.remove("light-mode"));
+        taskText.forEach(item => item.classList.remove("light-mode-input"));
         button.forEach(item => item.classList.remove("light-mode-input"));
         sidebar.classList.remove("light-mode");
         mainTasksContainer.classList.remove("light-mode");
@@ -371,6 +373,7 @@ darkModeBtn.addEventListener("click", () => {
         input.forEach(item => item.classList.add("dark-mode-input"));
         select.forEach(item => item.classList.add("dark-mode-input"));
         option.forEach(item => item.classList.add("dark-mode"));
+        taskText.forEach(item => item.classList.add("dark-mode-input"));
         button.forEach(item => item.classList.add("dark-mode-input"));
         sidebar.classList.add("dark-mode");
         mainTasksContainer.classList.add("dark-mode");
@@ -380,6 +383,7 @@ darkModeBtn.addEventListener("click", () => {
         input.forEach(item => item.classList.remove("dark-mode-input"));
         select.forEach(item => item.classList.remove("dark-mode-input"));
         option.forEach(item => item.classList.remove("dark-mode"));
+        taskText.forEach(item => item.classList.remove("dark-mode-input"));
         button.forEach(item => item.classList.remove("dark-mode-input"));
         sidebar.classList.remove("dark-mode");
         mainTasksContainer.classList.remove("dark-mode");
@@ -388,6 +392,7 @@ darkModeBtn.addEventListener("click", () => {
         input.forEach(item => item.classList.add("light-mode-input"));
         select.forEach(item => item.classList.add("light-mode-input"));
         option.forEach(item => item.classList.add("light-mode"));
+        taskText.forEach(item => item.classList.add("light-mode-input"));
         button.forEach(item => item.classList.add("light-mode-input"));
         sidebar.classList.add("light-mode");
         mainTasksContainer.classList.add("light-mode");
