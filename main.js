@@ -98,6 +98,8 @@ filterBtn.addEventListener("click", (e) => {
     
     let selectedList = lists.find(list => list.id === selectedListID);
     
+    if(!e.target.classList.contains("show") && !e.target.tagName.toLowerCase() == "p") return;
+
     if(e.target.classList.contains("show-all")) {
         filterBtn.querySelectorAll(".show").forEach(btn => btn.classList.remove("active-filter"));
         e.target.classList.add("active-filter")
@@ -113,6 +115,7 @@ filterBtn.addEventListener("click", (e) => {
     } else if(e.target.classList.contains("clear-done") || e.target.tagName.toLowerCase() == "p") {
         selectedList.tasks = selectedList.tasks.filter(task => !task.done)
         filteredList.tasks = selectedList.tasks;
+        console.log(1);
     }
     clear(tasksContainer);
     save();
@@ -197,7 +200,6 @@ function render() {
     clear(tasksContainer);
     checkDarkMode(darkMode);
     renderTasks(selectedList);
-    
     checkBackground(chosenBackground);
 }
 
