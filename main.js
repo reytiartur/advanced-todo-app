@@ -260,35 +260,6 @@ function renderLists() {
         showTasksCount(selectedList);
     };
 
-    // function renderLists() {
-    //     if(lists.length <= 0) {
-    //         clear(mainTasksContainer);
-    //         renderTasks();
-    //     } else {
-    //         mainTasksContainer.innerHTML = `
-    //             <div class="tasks-header">
-    //                 <h2 class="list-name" data-list-name></h2>
-    //                 <div class="remaining" data-list-count></div>
-    //             </div>
-    
-    //             <div class="tasks-container" data-tasks></div>
-    
-    //             <form action="" data-new-task-form>
-    //                 <input class="input-task" type="text" data-new-task-input placeholder="Add a task">
-    //                 <button class="task-button plus">+</button>
-    //             </form>
-    
-    //             <div class="filter">
-    //                 <button class="show show-all active-filter">All</button>
-    //                 <button class="show show-done">Done</button>
-    //                 <button class="show show-active">Active</button>
-    //                 <button class="show clear-done"><p>Clear Done</p></button>
-    //             </div>`
-    //     };
-
-    
-
-
 function renderTasks(selectedList) {
     if(!selectedList) return;
 
@@ -489,8 +460,6 @@ darkModeBtn.addEventListener("click", () => {
     }
     save();
 })
-
-
 
 function checkBackground(chosenBackground) {
     let options = document.querySelectorAll("option");

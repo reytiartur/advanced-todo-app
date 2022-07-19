@@ -626,7 +626,7 @@ option {
 
     .tasks-container{
         font-size: 20px;
-        height: 70%;
+        height: 65%;
     }
 
     .custom-checkbox {
@@ -645,7 +645,7 @@ option {
     .main form {
         width: fit-content;
         margin-inline: auto;
-        margin-block: .5rem;
+        margin-block: .75rem;
     }
 
     .main input {
