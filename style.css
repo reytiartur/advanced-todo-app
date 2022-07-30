@@ -71,6 +71,7 @@ h1 {
 .main-container {
     height: 60vh;  
     display: flex;
+    flex: 0 0 1;
 }
 
 /* Side Content */
@@ -349,7 +350,9 @@ svg:hover {
 /* Quotes */
 .quote-container {
     align-self: center;
-    width: 40%;
+    min-width: 40%;
+    max-width: 60%;
+    max-height: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
