@@ -9,7 +9,7 @@ let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LISTS)) || [];
 let selectedListID = localStorage.getItem(LOCAL_STORAGE_SELECTED_LIST_ID);
 let darkMode = JSON.parse(localStorage.getItem(LOCAL_STORAGE_DARK_MODE));
 let chosenBackground = JSON.parse(localStorage.getItem(LOCAL_STORAGE_CHOSEN_BG)) || "url(./images/ancient1.jpg)";
-let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST));
+let filteredList = JSON.parse(localStorage.getItem(LOCAL_STORAGE_FILTERED_LIST)) || [];
 
 let sidebar = document.querySelector("[data-sidebar]");
 let listsContainer = document.querySelector("[data-lists]");
@@ -97,6 +97,7 @@ themeChanger.addEventListener('change', function() {
 filterBtn.addEventListener("click", (e) => {
     
     let selectedList = lists.find(list => list.id === selectedListID);
+    console.log(selectedList)
     
     if(!e.target.classList.contains("show") && !e.target.tagName.toLowerCase() == "p") return;
 
@@ -364,13 +365,11 @@ function deleteList(e) {
         let index = lists.findIndex(list => list.id == selectedListID);
         if (index > -1) {
             lists.splice(index, 1);
-            console.log(lists)
         }
 
         if(lists.length > 0) {
             if(lists[index - 1]) {
             selectedListID = lists[index - 1].id;
-            console.log(selectedListID)
             } else if(lists[0]) {
             selectedListID = lists[0].id;
             } else {
